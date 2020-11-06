@@ -1,0 +1,66 @@
+<div class="p-grid p-m-3 p-shadow-2 card" [formGroup]="tripForm">
+  
+  <div class="p-col-12 p-p-3 text-title3 card-header" [ngStyle]="{'background-color':trip?.color+'50', color: trip?.color}">
+    <ng-container *ngIf="!edit">
+      {{trip?.destination}}
+    </ng-container>
+    <input *ngIf="edit" type="text" 
+      class="text-large p-col-12" pInputText
+      formControlName="destination"
+      placeholder="Enter the destination"/>
+  </div>
+
+  <div class="p-col-12 p-mx-3">
+    
+    <div class="p-grid text-regular">
+      <div class="p-col-4">Start Date</div>
+      <div class="p-col-8 p-text-bold">{{trip?.start | date:'mediumDate'}}</div>
+    </div>
+
+    <div class="p-grid text-regular">
+      <div class="p-col-4">Duration</div>
+      <div class="p-col-8 p-text-bold">{{trip?.duration}} Days</div>
+    </div>
+
+    <div class="p-grid text-regular">
+      <div class="p-col-4">Comment</div>
+      <div *ngIf="!edit" class="p-col-7">{{trip?.comment}}</div>
+      <textarea *ngIf="edit" type="text" 
+        class="text-regular p-col-7"
+        formControlName="comment" autoResize="true"
+        pInputTextarea placeholder="Enter the comment">
+      </textarea>
+    </div>
+
+  </div>
+
+  <hr style="border:1px solid #D9D9D9; width:95%;">
+
+  <div class="p-col-12 p-p-0">
+    <div class="p-d-flex p-jc-end p-p-2 card-footer">
+      <button pButton pRipple
+        *ngIf="!edit"
+        type="button" icon="pi pi-pencil" 
+        label="Edit" class="p-button-outlined p-mx-2"
+        (click)="edit = !edit">
+      </button>
+      
+      <button pButton pRipple
+        *ngIf="edit"
+        type="button" label="Save"
+        class="p-mx-2" (click)="save()">
+      </button>
+
+      <button pButton pRipple
+        *ngIf="edit" icon="pi pi-times"
+        type="button" label="Cancel"
+        class="p-button-outlined p-button-warning p-mx-2" (click)="edit = !edit">
+      </button>
+      
+      <button pButton pRipple *ngIf="!edit"
+        type="button" icon="pi pi-trash" (click)="deleteTrip()" 
+        label="Delete" class="p-button-outlined p-button-danger p-mx-2">
+      </button>
+    </div>
+  </div>
+</div>

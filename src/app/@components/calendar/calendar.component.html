@@ -1,0 +1,37 @@
+<div class="p-d-flex p-jc-evenly p-my-3">
+  <button pButton pRipple mwlCalendarPreviousView 
+  [view]="view" [(viewDate)]="viewDate"
+  type="button" icon="pi pi-angle-left" 
+  style="height:40px;"
+  label="Previous Month" class="p-mx-2">
+  </button>
+
+  <div class="text-title3">
+    {{viewDate | date:'MMMM y'}}
+  </div>
+
+  <button pButton pRipple mwlCalendarNextView 
+    [view]="view" [(viewDate)]="viewDate"
+    type="button" icon="pi pi-angle-right" iconPos="right"
+    style="height:40px;" 
+    label="Next Month" class="p-mx-2">
+  </button>
+</div>
+
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+  <div [ngStyle]="{'background-color':day.events[0]?.color.primary+'50'}">
+    <div class="cal-cell-top">
+      <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    </div>
+    <small class="text-small p-pb-1 p-pl-1"[ngStyle]="{'color':day.events[0]?.color.primary}">
+      {{ day.events[0]?.title }}
+    </small>
+  </div>
+</ng-template>
+
+
+<mwl-calendar-month-view
+  [viewDate]="viewDate"
+  [events]="events$ | async"
+  [cellTemplate]="customCellTemplate">
+</mwl-calendar-month-view>

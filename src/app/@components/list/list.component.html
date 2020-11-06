@@ -1,0 +1,9 @@
+<ng-container *ngIf="($trips | async).length == 0">
+  <app-trip-skeleton *ngFor="let item of [].constructor(3)"></app-trip-skeleton>
+</ng-container>
+
+
+<app-trip *ngFor="let trip of $trips | async"
+  [trip]="trip">
+</app-trip>
+
